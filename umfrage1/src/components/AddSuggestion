@@ -1,0 +1,25 @@
+import { React, TextField } from 'react';
+import { Row, Col, Button } from 'react-bootstrap';
+
+const AddSuggestion = ({ suggestion, updateSuggestion, removeSuggestion }) => {
+
+    const handleNameChange = (e) => {
+        updateSuggestion({...suggestion, SuggestionName: e})
+    }
+  
+  return (
+    <Row>
+      <Col>
+        <TextField id="outlined-basic" label="Vorschlag" variant="outlined" onChange={handleNameChange}/>
+      </Col>
+      <Col xs={1}>
+        <Button 
+          onClick={e => removeSuggestion(suggestion)} 
+          variant='outline-dark'
+        >x</Button>
+      </Col>
+    </Row>
+  )
+}
+
+export default AddSuggestion;

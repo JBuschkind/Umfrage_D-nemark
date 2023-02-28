@@ -1,0 +1,143 @@
+import { React, useState, useEffect } from 'react';
+import { Stack, Row, Col, Form, Button, FloatingLabel, Container } from 'react-bootstrap'
+import AddSuggestion from './AddSuggestion';
+import AddBreakfast from './AddBreakfast';
+
+const DkForm = () => {
+  
+  const [ suggestions, setSuggestions ] = useState([])
+  const [ breakfast, setBreakfast ] = useState([])
+
+  const [listIdSugg, setListIdSugg] = useState(1)
+  const [listIdBreak, setListIdBreak] = useState(1)
+
+  const [formData, setFormData] = useState({
+    name: ' ',
+    suggestions: [],
+    breakfast: [],
+    id: null
+  })
+
+  const updateSuggestion = (suggestionObj) => {
+    const updatedSuggestions = formData.suggestions.map((suggestion) => {
+      if (suggestion.listId === suggestionObj.listId) {
+        return suggestionObj
+      }
+      return suggestion
+    })
+    setFormData({...formData, suggestions: updatedSuggestions})
+  }
+
+  const updateBreakfast = (BreakfastObj) => {
+    const updatedBreakfast = formData.Breakfast.map((Breakfast) => {
+      if (breakfast.listId === BreakfastObj.listId) {
+        return BreakfastObj
+      }
+      return Breakfast
+    })
+    setFormData({...formData, breakfast: updatedBreakfast})
+  }
+  
+  const removeSuggestion = (suggestionObj) => {
+    const updatedSuggestions = formData.suggestions.filter((suggestion) => suggestion.listId !== suggestionObj.listId)
+    setFormData({...formData, suggestions: updatedSuggestions})
+  }
+
+  const removeBreakfast = (breakfastObj) => {
+    const updatedBreakfast = formData.breakfast.filter((breakfast) => breakfast.listId !== breakfastObj.listId)
+    setFormData({...formData, breakfast: updatedBreakfast})
+  }
+  
+  const addSuggestion = () => {
+
+    setFormData({
+      ...formData, suggestions: [
+        ...formData.suggestions,{
+          listId: listIdSugg,
+          Suggestion_id: 0,
+          SuggestionName : ' '
+        }
+      ]
+    })
+    setListIdSugg(listIdSugg + 1)
+  }
+
+  const addBreakfast = () => {
+
+    setFormData({
+      ...formData, breakfast: [
+        ...formData.breakfast,{
+          listId: listIdBreak,
+          Breakfast_id: 0,
+          BreakfastName : ' '
+        }
+      ]
+    })
+    setListIdBreak(listIdBreak + 1)
+  }
+
+  const renderSuggestion = formData.suggestion.map(suggestion => <AddSuggestion 
+    key={suggestion.listId} 
+    suggestion={suggestion} 
+    listId={listIdSugg - 1} 
+    updateSuggestion={updateSuggestion} 
+    removeSuggestion={removeSuggestion} 
+  />)
+
+  const renderBreakfast = formData.breakfast.map(breakfast => <AddBreakfast 
+    key={breakfast.listId} 
+    suggestion={breakfast} 
+    listId={listIdBreak - 1} 
+    updateBreakfast={updateBreakfast} 
+    removeBreakfast={removeBreakfast} 
+  />)
+
+
+  return (
+    <Container>
+      <Stack gap={3}>
+        <Form>
+          <FloatingLabel
+            controlId="floatingInput"
+            label="Name"
+            className="mb-3"
+          >
+            <Form.Control 
+              type="text" 
+              value={formData.name} 
+              onChange={e => setFormData({...formData, name: e.target.value})} placeholder="Hier deinen Namen" 
+            />
+          </FloatingLabel>
+
+          <Row>
+            <br></br>
+          </Row>
+            {renderSuggestion}
+          <Row>
+            <br></br>
+            <Button 
+              variant='warning' 
+              onClick={addSuggestion}
+            >Hinzufgen</Button>
+          </Row>
+          <br></br>
+          <Row>
+            <br></br>
+          </Row>
+            {renderBreakfast}
+          <Row>
+            <br></br>
+            <Button 
+              variant='warning' 
+              onClick={addBreakfast}
+            >Hinzufgen</Button>
+          </Row>
+          <Button type='submit' variant='warning' >Save</Button>
+        </Form>
+      </Stack>
+    </Container>
+        
+  )
+}
+
+export default DkForm;
