@@ -1,0 +1,1 @@
+curl -X GET -H "Content-Type: application/json"  "http://busch.click:3000/user"

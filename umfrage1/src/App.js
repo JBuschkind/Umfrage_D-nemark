@@ -67,7 +67,6 @@ function App() {
       ...formData, list_breakfast: [
         ...formData.list_breakfast,{
           listId: listIdBreak,
-          Breakfast_id: 0,
           BreakfastName : ' '
         }
       ]
@@ -100,6 +99,39 @@ function App() {
 
   const handleSave = () => {
     
+    var XMLHttpRequest = require('xhr2');
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://busch.click:3000/user");
+    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+    let suggest = "";
+    let breakf = "";
+
+    formData.list_suggestions.map(suggestion =>
+      suggest = suggest + "," + get(suggestion, "SuggestionName", 'default'))
+
+    formData.list_breakfast.map(brk =>
+      breakf = breakf + "," + get(brk, "BreakfastName", 'default'))
+
+    
+    suggest = suggest.substring(1);
+    breakf = breakf.substring(1);
+    const body = JSON.stringify({
+      name: formData.name,
+      sugg: suggest,
+      break: breakf
+    });
+    xhr.onload = () => {
+      if (xhr.readyState == 4 && xhr.status == 201) {
+        console.log(JSON.parse(xhr.responseText));
+      } else {
+        console.log(`Error: ${xhr.status}`);
+      }
+    };
+    //console.log(body);
+    xhr.send(body);
+
+    /*
     var out = new XMLWriter ;
     out.startDocument();
     out.startElement('user');
@@ -116,7 +148,7 @@ function App() {
     out.endElement();
     out.endElement();
     out.endDocument();
-    console.log(out.toString());
+    console.log(out.toString());*/
   }
 
 
