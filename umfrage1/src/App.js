@@ -1,5 +1,5 @@
-import { React, useState, useEffect, TextField } from 'react';
-import { Stack, Row, Col, Form, Button, FloatingLabel, Container } from 'react-bootstrap'
+import { React, useState } from 'react';
+import {Row, Col, Form, Button, Container } from 'react-bootstrap'
 //import AddSuggestion from './components/AddSuggestion';
 
 var XMLWriter  = require('xml-writer');
@@ -122,48 +122,46 @@ function App() {
 
 
   return (
-    <Container>
-      
-        <Form>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Name"
-            className="mb-3"
-          >
-            <Form.Control 
-              type="text" 
-              value={formData.name} 
-              onChange={e => setFormData({...formData, name: e.target.value})} placeholder="Hier deinen Namen" 
-            />
-          </FloatingLabel>
+    <div>
+      <Container>
+        
+          <Form>
+            <Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" value={formData.name} placeholder="Hier deinen Namen" onChange={e => setFormData({...formData, name: e.target.value})} /> 
+            </Form.Group>
 
-          <Row>
             <br></br>
-          </Row>
+            <a>Hast du vorschläge was wir die woche über kochen könnten?</a>
+            <br></br>
+            <br></br>
+            
             {renderSuggestion}
-          <Row>
+            
             <br></br>
-            <Button 
-              variant='warning' 
-              onClick={addSuggestion}
-            >Hinzufgen</Button>
-          </Row>
-          <br></br>
-          <Row>
+
+            <Button variant="primary" onClick={addSuggestion}>Essensvorschlag hinzufügen</Button>
+            
             <br></br>
-          </Row>
+            <br></br>
+            <a>Was darf für dich beim Frühstück nicht fehlen?</a>
+            <br></br>
+            <br></br>
+            
             {renderBreakfast}
-          <Row>
+            
             <br></br>
-            <Button 
-              variant='warning' 
-              onClick={addBreakfast}
-            >Hinzufgen</Button>
-          </Row>
-          <Button variant='warning' onClick={handleSave}>Save</Button>
-        </Form>
-      
-    </Container>
+
+            <Button variant="primary" onClick={addBreakfast}>Frühstück hinzufügen</Button>
+
+            <br></br>
+            <br></br>
+
+            <Button variant="primary" onClick={handleSave}>Save</Button>
+          </Form>
+        
+      </Container>
+    </div>
     
   );
 }
@@ -196,17 +194,19 @@ const AddBreakfast = ({ breakfast, updateBreakfast, removeBreakfast, fieldname }
   }
 
 return (
-  <Row>
-    <Col>
-      <input type="text" name={fieldname} onChange={handleNameChange}/>
-    </Col>
-    <Col xs={1}>
-      <Button 
-        onClick={e => removeBreakfast(breakfast)} 
-        variant='outline-dark'
-      >x</Button>
-    </Col>
-  </Row>
+  <div>
+    <Row>
+      <Col>
+        <input type="text" name={fieldname} onChange={handleNameChange}/>
+      </Col>
+      <Col xs={1}>
+        <Button 
+          onClick={e => removeBreakfast(breakfast)} 
+          variant='outline-dark'
+        >x</Button>
+      </Col>
+    </Row>
+  </div>
 )
 }
 
