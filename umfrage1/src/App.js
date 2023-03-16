@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import {Row, Col, Form, Button, Container } from 'react-bootstrap'
+import {Row, Col, Form, Button, Container, FormGroup } from 'react-bootstrap'
 //import AddSuggestion from './components/AddSuggestion';
 
 var XMLWriter  = require('xml-writer');
@@ -208,9 +208,11 @@ const AddSuggestion = ({ suggestion, updateSuggestion, removeSuggestion, fieldna
 return (
   <Row>
     <Col>
-      <input type="text" name={fieldname} onChange={handleNameChange}/>
+      <FormGroup>
+        <Form.Control type="text" name={fieldname} onChange={handleNameChange}/>
+      </FormGroup>
     </Col>
-    <Col xs={1}>
+    <Col xs={'auto'}>
       <Button 
         onClick={e => removeSuggestion(suggestion)} 
         variant='outline-dark'
@@ -230,9 +232,11 @@ return (
   <div>
     <Row>
       <Col>
-        <input type="text" name={fieldname} onChange={handleNameChange}/>
+        <FormGroup>
+          <Form.Control type="text" name={fieldname} onChange={handleNameChange}/>
+        </FormGroup>
       </Col>
-      <Col xs={1}>
+      <Col xs={'auto'}>
         <Button 
           onClick={e => removeBreakfast(breakfast)} 
           variant='outline-dark'
