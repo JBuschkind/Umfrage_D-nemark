@@ -13,7 +13,7 @@ function App() {
   const [listIdBreak, setListIdBreak] = useState(1)
 
   const [formData, setFormData] = useState({
-    name: ' ',
+    name: '',
     list_suggestions: [],
     list_breakfast: [],
     id: null
@@ -165,7 +165,7 @@ function App() {
             </Form.Group>
 
             <br></br>
-            <a>Hast du vorschläge was wir die woche über kochen könnten?</a>
+            <a>Hast du Vorschläge was wir die Woche über kochen könnten?</a>
             <br></br>
             <br></br>
             
