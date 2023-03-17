@@ -125,6 +125,7 @@ function App() {
       if (xhr.readyState == 4 && xhr.status == 201) {
         console.log(JSON.parse(xhr.responseText));
         alert("Danke, du kannst die Seite jetzt schließen ^^")
+        window.location.reload();
       } else {
         alert("Da ist etwas schief gelaufen. Sag Johann Bescheid");
       }
