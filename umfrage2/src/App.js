@@ -115,7 +115,7 @@ function App() {
             <FormGroup controlId='food20'>
               <Form.Check type="checkbox" label="Wraps" />
             </FormGroup>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick="handleSave">
               Submit
             </Button>
           </Form>
