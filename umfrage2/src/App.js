@@ -47,7 +47,7 @@ function App() {
     <div>
       <Col xs={'auto'}>
         <Container>
-          <Form  onSubmit={handleSave}>
+          <Form  onSubmit={e => { e.preventDefault(); }}>
             <Form.Group className="mb-3" controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control required type="textarea" placeholder="Hier deinen Namen eintragen" />
